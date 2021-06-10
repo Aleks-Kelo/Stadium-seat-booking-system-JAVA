@@ -5,6 +5,9 @@
  */
 package stadiumseatbooker;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  *
  * @author Alex
@@ -39,6 +42,9 @@ public class Register extends javax.swing.JFrame {
         RegisterPasswordField2 = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
         confirmRegisterButton = new javax.swing.JButton();
+        emailWarningLabel = new javax.swing.JLabel();
+        passwordFormWarning = new javax.swing.JLabel();
+        passwordMatcherWarning = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,6 +58,12 @@ public class Register extends javax.swing.JFrame {
 
         jLabel6.setText("Re-enter password");
 
+        registerEmailField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registerEmailFieldActionPerformed(evt);
+            }
+        });
+
         RegisterPasswordField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RegisterPasswordField2ActionPerformed(evt);
@@ -63,6 +75,17 @@ public class Register extends javax.swing.JFrame {
 
         confirmRegisterButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         confirmRegisterButton.setText("Register");
+        confirmRegisterButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmRegisterButtonActionPerformed(evt);
+            }
+        });
+
+        emailWarningLabel.setText(" ");
+
+        passwordFormWarning.setText(" ");
+
+        passwordMatcherWarning.setText(" ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -71,61 +94,80 @@ public class Register extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(68, 68, 68)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(89, 89, 89)
-                                .addComponent(registerNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel2))
-                                .addGap(24, 24, 24)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(registerLastNameField)
-                                    .addComponent(registerEmailField)
-                                    .addComponent(RegisterPasswordField)
-                                    .addComponent(RegisterPasswordField2)))))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(144, 144, 144)
                         .addComponent(jLabel3))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(152, 152, 152)
-                        .addComponent(confirmRegisterButton)))
-                .addContainerGap(100, Short.MAX_VALUE))
+                        .addGap(151, 151, 151)
+                        .addComponent(confirmRegisterButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(68, 68, 68)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel1))
+                                .addGap(57, 57, 57))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel6)
+                                .addGap(18, 18, 18)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(registerNameField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                            .addComponent(registerLastNameField, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(registerEmailField, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(RegisterPasswordField)
+                            .addComponent(RegisterPasswordField2)
+                            .addComponent(emailWarningLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(passwordFormWarning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(passwordMatcherWarning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(89, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3)
-                .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(registerNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(registerLastNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(registerEmailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(RegisterPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(registerNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel1))
+                                .addGap(26, 26, 26)
+                                .addComponent(registerLastNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel2))
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(registerEmailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(emailWarningLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(RegisterPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(passwordFormWarning)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(RegisterPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
-                .addGap(31, 31, 31)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(passwordMatcherWarning)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addComponent(confirmRegisterButton)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addGap(24, 24, 24))
         );
+
+        registerEmailField.getAccessibleContext().setAccessibleName("");
+        emailWarningLabel.getAccessibleContext().setAccessibleName("emailFormWarning");
+        passwordFormWarning.getAccessibleContext().setAccessibleName("passwordFormWarning");
+        passwordMatcherWarning.getAccessibleContext().setAccessibleName("passwordMatchWarning");
+
+        getAccessibleContext().setAccessibleName("emailWarningLabel");
 
         pack();
         setLocationRelativeTo(null);
@@ -135,18 +177,36 @@ public class Register extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_RegisterPasswordField2ActionPerformed
 
+    private void registerEmailFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerEmailFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_registerEmailFieldActionPerformed
+
+    private void confirmRegisterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmRegisterButtonActionPerformed
+        
+        Pattern emailPattern = Pattern.compile("^\\S+@\\S+\\.\\S+$");
+        Matcher emailMatcher = emailPattern.matcher(registerEmailField.getText());
+        boolean isEmailValid = emailMatcher.matches();
+        emailWarningLabel.setText();
+        
+         
+        
+    }//GEN-LAST:event_confirmRegisterButtonActionPerformed
+
  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPasswordField RegisterPasswordField;
     private javax.swing.JPasswordField RegisterPasswordField2;
     private javax.swing.JButton confirmRegisterButton;
+    private javax.swing.JLabel emailWarningLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel passwordFormWarning;
+    private javax.swing.JLabel passwordMatcherWarning;
     private javax.swing.JTextField registerEmailField;
     private javax.swing.JTextField registerLastNameField;
     private javax.swing.JTextField registerNameField;
